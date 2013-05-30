@@ -11,39 +11,46 @@
 
 @class OCCalendarView;
 
-@protocol OCCalendarDelegate <NSObject>
+@protocol OCCalendarDelegate;
 
--(void)completedWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
-
--(void)completedWithNoSelection;
-
-@end
-
-@interface OCCalendarViewController : UIViewController <UIGestureRecognizerDelegate> {
-    id <OCCalendarDelegate> delegate;
-    
-    UILabel *toolTipLabel;
-    OCCalendarView *calView;
-    
-    CGPoint insertPoint;
-    OCArrowPosition arrowPos;
-    
-    UIView *parentView;
-    
-    NSDate *startDate;
-    NSDate *endDate;
-    
-    OCSelectionMode selectionMode;
+@interface OCCalendarViewController : UIViewController <
+  UIGestureRecognizerDelegate
+> {
+  UILabel * toolTipLabel_;
+  OCCalendarView * calView_;
+  
+  CGPoint insertPoint_;
+  OCArrowPosition arrowPos_;
+  
+  UIView * parentView_;
+  
+  NSDate * startDate_;
+  NSDate * endDate_;
+  
+  OCSelectionMode selectionMode_;
+  
+  id <OCCalendarDelegate> delegate_;
 }
 
-@property (nonatomic, assign) id <OCCalendarDelegate> delegate;
+@property (nonatomic, retain) OCCalendarView *calView;
 @property (nonatomic, retain) NSDate *startDate;
 @property (nonatomic, retain) NSDate *endDate;
 @property (nonatomic, assign) OCSelectionMode selectionMode;
+@property (nonatomic, assign) id <OCCalendarDelegate> delegate;
 
-- (id)initAtPoint:(CGPoint)point inView:(UIView *)v;
-- (id)initAtPoint:(CGPoint)point inView:(UIView *)v arrowPosition:(OCArrowPosition)ap;
-- (id)initAtPoint:(CGPoint)point inView:(UIView *)v arrowPosition:(OCArrowPosition)ap selectionMode:(OCSelectionMode)sm;
+- (id)initAtPoint:(CGPoint)point inView:(UIView *)view;
+- (id)initAtPoint:(CGPoint)point inView:(UIView *)view arrowPosition:(OCArrowPosition)arrowPosition;
+- (id)initAtPoint:(CGPoint)point inView:(UIView *)view arrowPosition:(OCArrowPosition)arrowPosition selectionMode:(OCSelectionMode)selectionMode;
 
+@end
+
+
+@protocol OCCalendarDelegate <NSObject>
+
+@required
+-(void)completedWithStartDate:(NSDate *)startDate endDate:(NSDate *)endDate;
+
+@optional
+-(void)completedWithNoSelection;
 
 @end
