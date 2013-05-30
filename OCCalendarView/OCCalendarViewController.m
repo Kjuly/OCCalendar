@@ -85,7 +85,7 @@
   if(self.startDate) [calView_ setStartDate:startDate_];
   if(self.endDate)   [calView_ setEndDate:endDate_];
   
-  [self.view addSubview:[calView_ autorelease]];
+  [self.view addSubview:calView_];
 }
 
 - (void)viewDidUnload {
@@ -156,7 +156,7 @@
     int height = 300;
     
     calView_ = [[OCCalendarView alloc] initAtPoint:point withFrame:CGRectMake(point.x - width*0.5, point.y - 31.4, width, height)];
-    [self.view addSubview:[calView_ autorelease]];
+    [self.view addSubview:calView_];
   }
   
   return YES;
