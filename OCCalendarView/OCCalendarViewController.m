@@ -29,19 +29,34 @@
   [super dealloc];
 }
 
+- (id)    initAtPoint:(CGPoint)point
+               inView:(UIView *)view
+        arrowPosition:(OCArrowPosition)arrowPosition
+        selectionMode:(OCSelectionMode)selectionMode
+     showViewAnimated:(BOOL)showViewAnimated
+withCalendarContainer:(BOOL)withCalendarContainer {
+  if (self = [super initWithNibName:nil bundle:nil]) {
+    insertPoint_           = point;
+    parentView_            = view;
+    arrowPos_              = arrowPosition;
+    selectionMode_         = selectionMode;
+    showViewAnimated_      = showViewAnimated;
+    withCalendarContainer_ = withCalendarContainer;
+  }
+  return self;
+}
+
 - (id)initAtPoint:(CGPoint)point
            inView:(UIView *)view
     arrowPosition:(OCArrowPosition)arrowPosition
     selectionMode:(OCSelectionMode)selectionMode
  showViewAnimated:(BOOL)showViewAnimated {
-  if (self = [super initWithNibName:nil bundle:nil]) {
-    insertPoint_      = point;
-    parentView_       = view;
-    arrowPos_         = arrowPosition;
-    selectionMode_    = selectionMode;
-    showViewAnimated_ = showViewAnimated;
-  }
-  return self;
+  return ([self initAtPoint:point
+                     inView:view
+              arrowPosition:arrowPosition
+              selectionMode:selectionMode
+           showViewAnimated:showViewAnimated
+      withCalendarContainer:YES]);
 }
 
 - (id)initAtPoint:(CGPoint)point
@@ -52,7 +67,8 @@
                      inView:view
               arrowPosition:arrowPosition
               selectionMode:selectionMode
-           showViewAnimated:YES]);
+           showViewAnimated:YES
+      withCalendarContainer:YES]);
 }
 
 - (id)initAtPoint:(CGPoint)point inView:(UIView *)v arrowPosition:(OCArrowPosition)ap {
@@ -93,7 +109,8 @@
   calView_ = [[OCCalendarView alloc] initAtPoint:insertPoint_
                                        withFrame:calViewFrame
                                    arrowPosition:arrowPos_
-                                    showAnimated:showViewAnimated_];
+                                    showAnimated:showViewAnimated_
+                           withCalendarContainer:withCalendarContainer_];
   [calView_ setSelectionMode:selectionMode_];
   if(self.startDate) [calView_ setStartDate:startDate_];
   if(self.endDate)   [calView_ setEndDate:endDate_];
