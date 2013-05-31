@@ -28,6 +28,7 @@
   NSDate * endDate_;
   
   OCSelectionMode selectionMode_;
+  BOOL showViewAnimated_;
   
   id <OCCalendarDelegate> delegate_;
 }
@@ -41,6 +42,7 @@
 - (id)initAtPoint:(CGPoint)point inView:(UIView *)view;
 - (id)initAtPoint:(CGPoint)point inView:(UIView *)view arrowPosition:(OCArrowPosition)arrowPosition;
 - (id)initAtPoint:(CGPoint)point inView:(UIView *)view arrowPosition:(OCArrowPosition)arrowPosition selectionMode:(OCSelectionMode)selectionMode;
+- (id)initAtPoint:(CGPoint)point inView:(UIView *)view arrowPosition:(OCArrowPosition)arrowPosition selectionMode:(OCSelectionMode)selectionMode showViewAnimated:(BOOL)showViewAnimated;
 
 @end
 

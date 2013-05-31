@@ -26,11 +26,19 @@
     _selectionMode = selectionMode;
    selectionView.selectionMode = _selectionMode;
 }
+
 - (id)initAtPoint:(CGPoint)p withFrame:(CGRect)frame {
   return [self initAtPoint:p withFrame:frame arrowPosition:OCArrowPositionCentered];
 }
 
 - (id)initAtPoint:(CGPoint)p withFrame:(CGRect)frame arrowPosition:(OCArrowPosition)arrowPos {
+  return [self initAtPoint:p withFrame:frame arrowPosition:arrowPos showAnimated:YES];
+}
+
+- (id)initAtPoint:(CGPoint)p
+        withFrame:(CGRect)frame
+    arrowPosition:(OCArrowPosition)arrowPos
+     showAnimated:(BOOL)showAnimated {
   //NSLog(@"Arrow Position: %u", arrowPos);
   
   //    CGRect frame = CGRectMake(p.x - 390*0.5, p.y - 31.4, 390, 270);
@@ -51,14 +59,14 @@
     endCellX = -1;
     endCellY = -1;
     
-	
-	hDiff = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? 41 : 43;
+    
+    hDiff = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? 41 : 43;
     vDiff = 30;
     
     selectionView = [[OCSelectionView alloc] initWithFrame:CGRectMake(66, 95, hDiff*7, vDiff*6)];
     [self addSubview:selectionView];
     
-	float xpos = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? 68 : 65;
+    float xpos = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? 68 : 65;
     daysView = [[OCDaysView alloc] initWithFrame:CGRectMake(xpos, 98, hDiff*7, vDiff*6)];
     [daysView setYear:currentYear];
     [daysView setMonth:currentMonth];
@@ -67,12 +75,14 @@
     
     selectionView.frame = CGRectMake(66, 95, hDiff * 7, ([daysView addExtraRow] ? 6 : 5)*vDiff);
     
-    //Make the view really small and invisible
-    CGAffineTransform tranny = CGAffineTransformMakeScale(0.1, 0.1);
-    self.transform = tranny;
-    self.alpha = 0.0f;
+    if (showAnimated) {
+      //Make the view really small and invisible
+      CGAffineTransform tranny = CGAffineTransformMakeScale(0.1, 0.1);
+      self.transform = tranny;
+      self.alpha = 0.0f;
       
-    [self performSelector:@selector(animateIn)];
+      [self performSelector:@selector(animateIn)];
+    }
   }
   return self;
 }

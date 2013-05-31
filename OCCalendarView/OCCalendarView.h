@@ -41,6 +41,7 @@ typedef enum {
 
 - (id)initAtPoint:(CGPoint)p withFrame:(CGRect)frame;
 - (id)initAtPoint:(CGPoint)p withFrame:(CGRect)frame arrowPosition:(OCArrowPosition)arrowPos;
+- (id)initAtPoint:(CGPoint)p withFrame:(CGRect)frame arrowPosition:(OCArrowPosition)arrowPos showAnimated:(BOOL)showAnimated;
 
 //Valid Positions: OCArrowPositionLeft, OCArrowPositionCentered, OCArrowPositionRight
 - (void)setArrowPosition:(OCArrowPosition)pos;

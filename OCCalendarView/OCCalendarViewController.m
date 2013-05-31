@@ -32,15 +32,27 @@
 - (id)initAtPoint:(CGPoint)point
            inView:(UIView *)view
     arrowPosition:(OCArrowPosition)arrowPosition
-    selectionMode:(OCSelectionMode)selectionMode {
-  self = [super initWithNibName:nil bundle:nil];
-  if(self) {
-    insertPoint_   = point;
-    parentView_    = view;
-    arrowPos_      = arrowPosition;
-    selectionMode_ = selectionMode;
+    selectionMode:(OCSelectionMode)selectionMode
+ showViewAnimated:(BOOL)showViewAnimated {
+  if (self = [super initWithNibName:nil bundle:nil]) {
+    insertPoint_      = point;
+    parentView_       = view;
+    arrowPos_         = arrowPosition;
+    selectionMode_    = selectionMode;
+    showViewAnimated_ = showViewAnimated;
   }
   return self;
+}
+
+- (id)initAtPoint:(CGPoint)point
+           inView:(UIView *)view
+    arrowPosition:(OCArrowPosition)arrowPosition
+    selectionMode:(OCSelectionMode)selectionMode {
+  return ([self initAtPoint:point
+                     inView:view
+              arrowPosition:arrowPosition
+              selectionMode:selectionMode
+           showViewAnimated:YES]);
 }
 
 - (id)initAtPoint:(CGPoint)point inView:(UIView *)v arrowPosition:(OCArrowPosition)ap {
@@ -80,7 +92,8 @@
   CGRect calViewFrame = CGRectMake(insertPoint_.x - arrowPosX, insertPoint_.y - 31.4, width, height);
   calView_ = [[OCCalendarView alloc] initAtPoint:insertPoint_
                                        withFrame:calViewFrame
-                                   arrowPosition:arrowPos_];
+                                   arrowPosition:arrowPos_
+                                    showAnimated:showViewAnimated_];
   [calView_ setSelectionMode:selectionMode_];
   if(self.startDate) [calView_ setStartDate:startDate_];
   if(self.endDate)   [calView_ setEndDate:endDate_];
