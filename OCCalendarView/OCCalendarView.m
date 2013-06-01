@@ -40,13 +40,25 @@
         withFrame:(CGRect)frame
     arrowPosition:(OCArrowPosition)arrowPos
      showAnimated:(BOOL)showAnimated {
-  
-  _withCalendarContainer = YES;
+  return [self initAtPoint:p
+                 withFrame:frame
+             arrowPosition:arrowPos
+              showAnimated:YES
+     withCalendarContainer:YES
+                todayColor:nil];
+}
+
+- (id)    initAtPoint:(CGPoint)p
+            withFrame:(CGRect)frame
+        arrowPosition:(OCArrowPosition)arrowPos
+         showAnimated:(BOOL)showAnimated
+withCalendarContainer:(BOOL)withCalendarContainer
+           todayColor:(UIColor *)todayColor {
   //NSLog(@"Arrow Position: %u", arrowPos);
-  
-  //    CGRect frame = CGRectMake(p.x - 390*0.5, p.y - 31.4, 390, 270);
-  self = [super initWithFrame:frame];
-  if(self) {
+  //CGRect frame = CGRectMake(p.x - 390*0.5, p.y - 31.4, 390, 270);
+  if (self = [super initWithFrame:frame]) {
+    _withCalendarContainer = withCalendarContainer;
+    
     self.backgroundColor = [UIColor clearColor];
     
     calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -71,6 +83,7 @@
     
     float xpos = UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone ? 68 : 65;
     daysView = [[OCDaysView alloc] initWithFrame:CGRectMake(xpos, 98, hDiff*7, vDiff*6)];
+    daysView.todayColor = todayColor;
     [daysView setYear:currentYear];
     [daysView setMonth:currentMonth];
     [daysView resetRows];
@@ -86,17 +99,6 @@
       
       [self performSelector:@selector(animateIn)];
     }
-  }
-  return self;
-}
-
-- (id)    initAtPoint:(CGPoint)p
-            withFrame:(CGRect)frame
-        arrowPosition:(OCArrowPosition)arrowPos
-         showAnimated:(BOOL)showAnimated
-withCalendarContainer:(BOOL)withCalendarContainer {
-  if (self = [self initAtPoint:p withFrame:frame arrowPosition:arrowPos showAnimated:showAnimated]) {
-    _withCalendarContainer = withCalendarContainer;
   }
   return self;
 }
@@ -795,8 +797,7 @@ withCalendarContainer:(BOOL)withCalendarContainer {
     roundedRectanglePath.lineWidth = 0.5;
     [roundedRectanglePath stroke];
     
-    
-    //Dividers
+    // Dividers
     float addedHeight = ([daysView addExtraRow] ? 24 : 0);
     for(int i = 0; i < dayTitles.count-1; i++) {
       //// divider Drawing
@@ -844,24 +845,27 @@ withCalendarContainer:(BOOL)withCalendarContainer {
     float endPoint = ([daysView addExtraRow] ? 278.4 : 256.4);
     CGContextDrawLinearGradient(context, gradient2, CGPointMake(206.75, endPoint), CGPointMake(206.75, 31.4), 0);
     CGContextRestoreGState(context);
-    
-    for(int i = 0; i < dayTitles.count; i++) {
-      //// dayHeader Drawing
-      CGContextSaveGState(context);
-      CGContextSetShadowWithColor(context, shadow2Offset, shadow2BlurRadius, shadow2);
-      CGRect dayHeaderFrame = CGRectMake(60+i*hDiff, 75, 30, 14);
-      [[UIColor whiteColor] setFill];
-      [((NSString *)[dayTitles objectAtIndex:i]) drawInRect: dayHeaderFrame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: UILineBreakModeWordWrap alignment: UITextAlignmentCenter];
-      CGContextRestoreGState(context);
-    }
   }
+  
+  
+  // Week
+  for(int i = 0; i < dayTitles.count; i++) {
+    //// dayHeader Drawing
+    CGContextSaveGState(context);
+    CGContextSetShadowWithColor(context, shadow2Offset, shadow2BlurRadius, shadow2);
+    CGRect dayHeaderFrame = CGRectMake(60+i*hDiff, 75, 30, 14);
+    [[UIColor whiteColor] setFill];
+    [((NSString *)[dayTitles objectAtIndex:i]) drawInRect: dayHeaderFrame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: UILineBreakModeWordWrap alignment: UITextAlignmentCenter];
+    CGContextRestoreGState(context);
+  }
+  
 
   int month = currentMonth;
   int year = currentYear;
   
 	NSString *monthTitle = [NSString stringWithFormat:@"%@ %d", [monthTitles objectAtIndex:(month - 1)], year];
   
-  //// Month Header Drawing
+  // Month Header Drawing
   CGContextSaveGState(context);
   CGContextSetShadowWithColor(context, shadow2Offset, shadow2BlurRadius, shadow2);
   CGRect textFrame = CGRectMake(94, 53, 220, 18);
@@ -869,7 +873,7 @@ withCalendarContainer:(BOOL)withCalendarContainer {
   [monthTitle drawInRect: textFrame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: UILineBreakModeWordWrap alignment: UITextAlignmentCenter];
   CGContextRestoreGState(context);
   
-  //// backArrow Drawing
+  // backArrow Drawing
   UIBezierPath* backArrowPath = [UIBezierPath bezierPath];
   [backArrowPath moveToPoint: CGPointMake(66, 58.5)];
   [backArrowPath addLineToPoint: CGPointMake(60, 62.5)];
@@ -879,7 +883,7 @@ withCalendarContainer:(BOOL)withCalendarContainer {
   [[UIColor whiteColor] setFill];
   [backArrowPath fill];
   
-  //// forwardArrow Drawing
+  // forwardArrow Drawing
   UIBezierPath* forwardArrowPath = [UIBezierPath bezierPath];
   [forwardArrowPath moveToPoint: CGPointMake(349.5, 58.5)];
   [forwardArrowPath addLineToPoint: CGPointMake(355.5, 62)];
@@ -889,7 +893,7 @@ withCalendarContainer:(BOOL)withCalendarContainer {
   [[UIColor whiteColor] setFill];
   [forwardArrowPath fill];
   
-  //// Cleanup
+  // Cleanup
   CGGradientRelease(gradient2);
   CGColorSpaceRelease(colorSpace);
 }

@@ -19,6 +19,7 @@
 @synthesize calView   = calView_;
 @synthesize startDate = startDate_,
             endDate   = endDate_;
+@synthesize todayColor = todayColor_;
 @synthesize selectionMode = selectionMode_;
 @synthesize delegate = delegate_;
 
@@ -34,7 +35,8 @@
         arrowPosition:(OCArrowPosition)arrowPosition
         selectionMode:(OCSelectionMode)selectionMode
      showViewAnimated:(BOOL)showViewAnimated
-withCalendarContainer:(BOOL)withCalendarContainer {
+withCalendarContainer:(BOOL)withCalendarContainer
+           todayColor:(UIColor *)todayColor {
   if (self = [super initWithNibName:nil bundle:nil]) {
     insertPoint_           = point;
     parentView_            = view;
@@ -42,6 +44,7 @@ withCalendarContainer:(BOOL)withCalendarContainer {
     selectionMode_         = selectionMode;
     showViewAnimated_      = showViewAnimated;
     withCalendarContainer_ = withCalendarContainer;
+    self.todayColor        = todayColor;
   }
   return self;
 }
@@ -56,7 +59,8 @@ withCalendarContainer:(BOOL)withCalendarContainer {
               arrowPosition:arrowPosition
               selectionMode:selectionMode
            showViewAnimated:showViewAnimated
-      withCalendarContainer:YES]);
+      withCalendarContainer:YES
+                 todayColor:nil]);
 }
 
 - (id)initAtPoint:(CGPoint)point
@@ -68,7 +72,8 @@ withCalendarContainer:(BOOL)withCalendarContainer {
               arrowPosition:arrowPosition
               selectionMode:selectionMode
            showViewAnimated:YES
-      withCalendarContainer:YES]);
+      withCalendarContainer:YES
+                 todayColor:nil]);
 }
 
 - (id)initAtPoint:(CGPoint)point inView:(UIView *)v arrowPosition:(OCArrowPosition)ap {
@@ -110,7 +115,8 @@ withCalendarContainer:(BOOL)withCalendarContainer {
                                        withFrame:calViewFrame
                                    arrowPosition:arrowPos_
                                     showAnimated:showViewAnimated_
-                           withCalendarContainer:withCalendarContainer_];
+                           withCalendarContainer:withCalendarContainer_
+                                      todayColor:self.todayColor];
   [calView_ setSelectionMode:selectionMode_];
   if(self.startDate) [calView_ setStartDate:startDate_];
   if(self.endDate)   [calView_ setEndDate:endDate_];
