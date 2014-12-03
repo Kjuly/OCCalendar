@@ -40,8 +40,8 @@
   
   NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
   
-  int month = currentMonth;
-  int year = currentYear;
+  long month = currentMonth;
+  long year = currentYear;
 	
 	//Get the first day of the month
 	NSDateComponents *dateParts = [[NSDateComponents alloc] init];
@@ -51,11 +51,11 @@
 	NSDate *dateOnFirst = [calendar dateFromComponents:dateParts];
 	[dateParts release];
 	NSDateComponents *weekdayComponents = [calendar components:NSWeekdayCalendarUnit fromDate:dateOnFirst];
-	int weekdayOfFirst = [weekdayComponents weekday];
+	long weekdayOfFirst = [weekdayComponents weekday];
   
   //NSLog(@"weekdayOfFirst:%d", weekdayOfFirst);
   
-	int numDaysInMonth = [calendar rangeOfUnit:NSDayCalendarUnit
+	long numDaysInMonth = [calendar rangeOfUnit:NSDayCalendarUnit
                                       inUnit:NSMonthCalendarUnit
                                      forDate:dateOnFirst].length;
   
@@ -77,7 +77,7 @@
   
   [prevDateParts release];
   
-  int numDaysInPrevMonth = [calendar rangeOfUnit:NSDayCalendarUnit
+  long numDaysInPrevMonth = [calendar rangeOfUnit:NSDayCalendarUnit
                                           inUnit:NSMonthCalendarUnit
                                          forDate:prevDateOnFirst].length;
   
@@ -85,15 +85,15 @@
   
   //Draw the text for each of those days.
   for(int i = 0; i <= weekdayOfFirst-2; i++) {
-    int day = numDaysInPrevMonth - weekdayOfFirst + 2 + i;
+    long day = numDaysInPrevMonth - weekdayOfFirst + 2 + i;
     
-    NSString *str = [NSString stringWithFormat:@"%d", day];
+    NSString *str = [NSString stringWithFormat:@"%ld", day];
     
     CGContextSaveGState(context);
     CGContextSetShadowWithColor(context, shadow2Offset, shadow2BlurRadius, shadow2);
     CGRect dayHeader2Frame = CGRectMake((i)*hDiff, 0, 21, 14);
     [[UIColor colorWithWhite:0.6f alpha:1.0f] setFill];
-    [str drawInRect: dayHeader2Frame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: UILineBreakModeWordWrap alignment: UITextAlignmentCenter];
+    [str drawInRect: dayHeader2Frame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
     CGContextRestoreGState(context);
   }
   
@@ -117,7 +117,7 @@
         } else {
           [[UIColor whiteColor] setFill];
         }
-        [str drawInRect: dayHeader2Frame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: UILineBreakModeWordWrap alignment: UITextAlignmentCenter];
+        [str drawInRect: dayHeader2Frame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
         CGContextRestoreGState(context);
         
         finalRow = i;
@@ -147,31 +147,31 @@
   [nextDateParts release];
   
   NSDateComponents *nextWeekdayComponents = [calendar components:NSWeekdayCalendarUnit fromDate:nextDateOnFirst];
-	int weekdayOfNextFirst = [nextWeekdayComponents weekday];
+	long weekdayOfNextFirst = [nextWeekdayComponents weekday];
   
   if(!endedOnSat) {
     //Draw the text for each of those days.
-    for(int i = weekdayOfNextFirst - 1; i < 7; i++) {
-      int day = i - weekdayOfNextFirst + 2;
+    for(long i = weekdayOfNextFirst - 1; i < 7; i++) {
+      long day = i - weekdayOfNextFirst + 2;
       
-      NSString *str = [NSString stringWithFormat:@"%d", day];
+      NSString *str = [NSString stringWithFormat:@"%ld", day];
       
       CGContextSaveGState(context);
       CGContextSetShadowWithColor(context, shadow2Offset, shadow2BlurRadius, shadow2);
       CGRect dayHeader2Frame = CGRectMake((i)*hDiff, finalRow * vDiff, 21, 14);
       [[UIColor colorWithWhite:0.6f alpha:1.0f] setFill];
-      [str drawInRect: dayHeader2Frame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: UILineBreakModeWordWrap alignment: UITextAlignmentCenter];
+      [str drawInRect: dayHeader2Frame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
       CGContextRestoreGState(context);
     }
   }
 }
 
-- (void)setMonth:(int)month {
+- (void)setMonth:(long)month {
   currentMonth = month;
   [self setNeedsDisplay];
 }
 
-- (void)setYear:(int)year {
+- (void)setYear:(long)year {
   currentYear = year;
   [self setNeedsDisplay];
 }
@@ -179,8 +179,8 @@
 - (void)resetRows {
   NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
   
-  int month = currentMonth;
-  int year = currentYear;
+  long month = currentMonth;
+  long year = currentYear;
 	
 	//Get the first day of the month
 	NSDateComponents *dateParts = [[NSDateComponents alloc] init];
@@ -190,9 +190,9 @@
 	NSDate *dateOnFirst = [calendar dateFromComponents:dateParts];
 	[dateParts release];
 	NSDateComponents *weekdayComponents = [calendar components:NSWeekdayCalendarUnit fromDate:dateOnFirst];
-	int weekdayOfFirst = [weekdayComponents weekday];
+	long weekdayOfFirst = [weekdayComponents weekday];
   
-	int numDaysInMonth = [calendar rangeOfUnit:NSDayCalendarUnit
+	long numDaysInMonth = [calendar rangeOfUnit:NSDayCalendarUnit
                                       inUnit:NSMonthCalendarUnit
                                      forDate:dateOnFirst].length;
   didAddExtraRow = NO;

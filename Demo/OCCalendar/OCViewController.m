@@ -122,7 +122,7 @@
     }
     
     toolTipLabel = [ [UILabel alloc ] initWithFrame:CGRectMake(self.view.frame.size.width-260.0, self.view.frame.size.height-35.0, 250.0, 25) ];
-    toolTipLabel.textAlignment =  UITextAlignmentCenter;
+    toolTipLabel.textAlignment =  NSTextAlignmentCenter;
     toolTipLabel.textColor = [UIColor whiteColor];
     toolTipLabel.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.5f];
     toolTipLabel.layer.cornerRadius = 5.0f;

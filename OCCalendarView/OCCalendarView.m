@@ -181,9 +181,9 @@ withCalendarContainer:(BOOL)withCalendarContainer
 - (NSDate *)getStartDate {
     CGPoint startPoint = [selectionView startPoint];
     
-    int day = 1;
-    int month = currentMonth;
-    int year = currentYear;
+    long day = 1;
+    long month = currentMonth;
+    long year = currentYear;
     
     //NSLog(@"startCurrentMonth:%d", currentMonth);
 	
@@ -195,9 +195,9 @@ withCalendarContainer:(BOOL)withCalendarContainer
 	NSDate *dateOnFirst = [calendar dateFromComponents:dateParts];
 	[dateParts release];
 	NSDateComponents *weekdayComponents = [calendar components:NSWeekdayCalendarUnit fromDate:dateOnFirst];
-	int weekdayOfFirst = [weekdayComponents weekday];	
+	long weekdayOfFirst = [weekdayComponents weekday];
     
-	int numDaysInMonth = [calendar rangeOfUnit:NSDayCalendarUnit 
+	long numDaysInMonth = [calendar rangeOfUnit:NSDayCalendarUnit
 										inUnit:NSMonthCalendarUnit 
                                        forDate:dateOnFirst].length;
     
@@ -238,9 +238,9 @@ withCalendarContainer:(BOOL)withCalendarContainer
     
     //NSLog(@"endPoint:(%f,%f)", endPoint.x, endPoint.y);
     
-    int day = 1;
-    int month = currentMonth;
-    int year = currentYear;
+    long day = 1;
+    long month = currentMonth;
+    long year = currentYear;
     
     //NSLog(@"endCurrentMonth:%d", currentMonth);
 	
@@ -252,9 +252,9 @@ withCalendarContainer:(BOOL)withCalendarContainer
 	NSDate *dateOnFirst = [calendar dateFromComponents:dateParts];
 	[dateParts release];
 	NSDateComponents *weekdayComponents = [calendar components:NSWeekdayCalendarUnit fromDate:dateOnFirst];
-	int weekdayOfFirst = [weekdayComponents weekday];	
+	long weekdayOfFirst = [weekdayComponents weekday];
     
-	int numDaysInMonth = [calendar rangeOfUnit:NSDayCalendarUnit 
+	long numDaysInMonth = [calendar rangeOfUnit:NSDayCalendarUnit
 										inUnit:NSMonthCalendarUnit 
                                        forDate:dateOnFirst].length;
 	if(endPoint.y == 0 && endPoint.x+1 < weekdayOfFirst) {
@@ -302,9 +302,9 @@ withCalendarContainer:(BOOL)withCalendarContainer
     if([sComponents year] != currentYear) {
         currentYear = [sComponents year];
     }
-    int day = 1;
-    int month = currentMonth;
-    int year = currentYear;
+    long day = 1;
+    long month = currentMonth;
+    long year = currentYear;
 	
 	//Get the first day of the month
 	NSDateComponents *dateParts = [[NSDateComponents alloc] init];
@@ -314,9 +314,9 @@ withCalendarContainer:(BOOL)withCalendarContainer
 	NSDate *dateOnFirst = [calendar dateFromComponents:dateParts];
 	[dateParts release];
 	NSDateComponents *weekdayComponents = [calendar components:NSWeekdayCalendarUnit fromDate:dateOnFirst];
-	int weekdayOfFirst = [weekdayComponents weekday];	
+	long weekdayOfFirst = [weekdayComponents weekday];
     
-	int numDaysInMonth = [calendar rangeOfUnit:NSDayCalendarUnit 
+	long numDaysInMonth = [calendar rangeOfUnit:NSDayCalendarUnit
 										inUnit:NSMonthCalendarUnit 
                                        forDate:dateOnFirst].length;
     
@@ -356,9 +356,9 @@ withCalendarContainer:(BOOL)withCalendarContainer
     if([eComponents year] != currentYear) {
         currentYear = [eComponents year];
     }
-    int day = 1;
-    int month = currentMonth;
-    int year = currentYear;
+    long day = 1;
+    long month = currentMonth;
+    long year = currentYear;
 	
 	//Get the first day of the month
 	NSDateComponents *dateParts = [[NSDateComponents alloc] init];
@@ -368,9 +368,9 @@ withCalendarContainer:(BOOL)withCalendarContainer
 	NSDate *dateOnFirst = [calendar dateFromComponents:dateParts];
 	[dateParts release];
 	NSDateComponents *weekdayComponents = [calendar components:NSWeekdayCalendarUnit fromDate:dateOnFirst];
-	int weekdayOfFirst = [weekdayComponents weekday];	
+	long weekdayOfFirst = [weekdayComponents weekday];
     
-	int numDaysInMonth = [calendar rangeOfUnit:NSDayCalendarUnit 
+	long numDaysInMonth = [calendar rangeOfUnit:NSDayCalendarUnit
 										inUnit:NSMonthCalendarUnit 
                                        forDate:dateOnFirst].length;
     
@@ -634,21 +634,21 @@ withCalendarContainer:(BOOL)withCalendarContainer
         CGContextSetShadowWithColor(context, shadow2Offset, shadow2BlurRadius, shadow2);
         CGRect dayHeaderFrame = CGRectMake(63+i*hDiff, 75, 30, 14); 
         [[UIColor whiteColor] setFill];
-        [((NSString *)[dayTitles objectAtIndex:i]) drawInRect: dayHeaderFrame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: UILineBreakModeWordWrap alignment: UITextAlignmentCenter];
+        [((NSString *)[dayTitles objectAtIndex:i]) drawInRect: dayHeaderFrame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
         CGContextRestoreGState(context);
     }
     
-    int month = currentMonth;
-    int year = currentYear;
+    long month = currentMonth;
+    long year = currentYear;
     
-	NSString *monthTitle = [NSString stringWithFormat:@"%@ %d", [monthTitles objectAtIndex:(month - 1)], year];
+	NSString *monthTitle = [NSString stringWithFormat:@"%@ %ld", [monthTitles objectAtIndex:(month - 1)], year];
     
     //// Month Header Drawing
     CGContextSaveGState(context);
     CGContextSetShadowWithColor(context, shadow2Offset, shadow2BlurRadius, shadow2);
     CGRect textFrame = CGRectMake(94, 53, 220, 18);
     [[UIColor whiteColor] setFill];
-    [monthTitle drawInRect: textFrame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: UILineBreakModeWordWrap alignment: UITextAlignmentCenter];
+    [monthTitle drawInRect: textFrame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
     CGContextRestoreGState(context);
     
     //// backArrow Drawing
@@ -855,22 +855,22 @@ withCalendarContainer:(BOOL)withCalendarContainer
     CGContextSetShadowWithColor(context, shadow2Offset, shadow2BlurRadius, shadow2);
     CGRect dayHeaderFrame = CGRectMake(60+i*hDiff, 75, 30, 14);
     [[UIColor whiteColor] setFill];
-    [((NSString *)[dayTitles objectAtIndex:i]) drawInRect: dayHeaderFrame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: UILineBreakModeWordWrap alignment: UITextAlignmentCenter];
+    [((NSString *)[dayTitles objectAtIndex:i]) drawInRect: dayHeaderFrame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
     CGContextRestoreGState(context);
   }
   
 
-  int month = currentMonth;
-  int year = currentYear;
+  long month = currentMonth;
+  long year = currentYear;
   
-	NSString *monthTitle = [NSString stringWithFormat:@"%@ %d", [monthTitles objectAtIndex:(month - 1)], year];
+	NSString *monthTitle = [NSString stringWithFormat:@"%@ %ld", [monthTitles objectAtIndex:(month - 1)], year];
   
   // Month Header Drawing
   CGContextSaveGState(context);
   CGContextSetShadowWithColor(context, shadow2Offset, shadow2BlurRadius, shadow2);
   CGRect textFrame = CGRectMake(94, 53, 220, 18);
   [[UIColor whiteColor] setFill];
-  [monthTitle drawInRect: textFrame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: UILineBreakModeWordWrap alignment: UITextAlignmentCenter];
+  [monthTitle drawInRect: textFrame withFont: [UIFont fontWithName: @"Helvetica" size: 12] lineBreakMode: NSLineBreakByWordWrapping alignment: NSTextAlignmentCenter];
   CGContextRestoreGState(context);
   
   // backArrow Drawing
