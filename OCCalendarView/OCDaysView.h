@@ -26,7 +26,7 @@
     BOOL didAddExtraRow;
 }
 
-@property (nonatomic, retain) UIColor * todayColor;
+@property (nonatomic, strong) UIColor * todayColor;
 
 - (void)setMonth:(long)month;
 - (void)setYear:(long)year;

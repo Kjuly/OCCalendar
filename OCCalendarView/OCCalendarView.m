@@ -193,7 +193,6 @@ withCalendarContainer:(BOOL)withCalendarContainer
 	[dateParts setYear:year];
 	[dateParts setDay:1];
 	NSDate *dateOnFirst = [calendar dateFromComponents:dateParts];
-	[dateParts release];
 	NSDateComponents *weekdayComponents = [calendar components:NSWeekdayCalendarUnit fromDate:dateOnFirst];
 	long weekdayOfFirst = [weekdayComponents weekday];
     
@@ -224,7 +223,7 @@ withCalendarContainer:(BOOL)withCalendarContainer
         }
     }
     
-    NSDateComponents *comps = [[[NSDateComponents alloc] init] autorelease];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
     [comps setDay:day];
     [comps setMonth:month];
     [comps setYear:year];
@@ -250,7 +249,6 @@ withCalendarContainer:(BOOL)withCalendarContainer
 	[dateParts setYear:year];
 	[dateParts setDay:1];
 	NSDate *dateOnFirst = [calendar dateFromComponents:dateParts];
-	[dateParts release];
 	NSDateComponents *weekdayComponents = [calendar components:NSWeekdayCalendarUnit fromDate:dateOnFirst];
 	long weekdayOfFirst = [weekdayComponents weekday];
     
@@ -282,7 +280,7 @@ withCalendarContainer:(BOOL)withCalendarContainer
         }
     }
         
-    NSDateComponents *comps = [[[NSDateComponents alloc] init] autorelease];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
     [comps setDay:day];
     [comps setMonth:month];
     [comps setYear:year];
@@ -312,7 +310,6 @@ withCalendarContainer:(BOOL)withCalendarContainer
 	[dateParts setYear:year];
 	[dateParts setDay:1];
 	NSDate *dateOnFirst = [calendar dateFromComponents:dateParts];
-	[dateParts release];
 	NSDateComponents *weekdayComponents = [calendar components:NSWeekdayCalendarUnit fromDate:dateOnFirst];
 	long weekdayOfFirst = [weekdayComponents weekday];
     
@@ -366,7 +363,6 @@ withCalendarContainer:(BOOL)withCalendarContainer
 	[dateParts setYear:year];
 	[dateParts setDay:1];
 	NSDate *dateOnFirst = [calendar dateFromComponents:dateParts];
-	[dateParts release];
 	NSDateComponents *weekdayComponents = [calendar components:NSWeekdayCalendarUnit fromDate:dateOnFirst];
 	long weekdayOfFirst = [weekdayComponents weekday];
     
@@ -899,13 +895,5 @@ withCalendarContainer:(BOOL)withCalendarContainer
 }
 
 
-- (void)dealloc {
-  
-    [selectionView release];
-    [calendar release];
-    
-    [super dealloc];
-    
-}
 
 @end

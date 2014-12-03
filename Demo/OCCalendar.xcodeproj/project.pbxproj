@@ -298,6 +298,7 @@
 		B1558BF7152648CB00326469 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Oliver Rickard (M2X353B497)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCCalendar/OCCalendar-Prefix.pch";
@@ -312,6 +313,7 @@
 		B1558BF8152648CB00326469 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "OCCalendar/OCCalendar-Prefix.pch";
 				INFOPLIST_FILE = "OCCalendar/OCCalendar-Info.plist";

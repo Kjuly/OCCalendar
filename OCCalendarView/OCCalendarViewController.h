@@ -33,15 +33,15 @@
   BOOL showViewAnimated_;
   BOOL withCalendarContainer_;
   
-  id <OCCalendarDelegate> delegate_;
+  id <OCCalendarDelegate> __weak delegate_;
 }
 
-@property (nonatomic, retain) OCCalendarView * calView;
-@property (nonatomic, retain) NSDate * startDate;
-@property (nonatomic, retain) NSDate * endDate;
-@property (nonatomic, retain) UIColor * todayColor;
+@property (nonatomic, strong) OCCalendarView * calView;
+@property (nonatomic, strong) NSDate * startDate;
+@property (nonatomic, strong) NSDate * endDate;
+@property (nonatomic, strong) UIColor * todayColor;
 @property (nonatomic, assign) OCSelectionMode selectionMode;
-@property (nonatomic, assign) id <OCCalendarDelegate> delegate;
+@property (nonatomic, weak) id <OCCalendarDelegate> delegate;
 
 - (id)initAtPoint:(CGPoint)point inView:(UIView *)view;
 - (id)initAtPoint:(CGPoint)point inView:(UIView *)view arrowPosition:(OCArrowPosition)arrowPosition;

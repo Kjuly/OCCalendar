@@ -24,10 +24,7 @@
 @synthesize delegate = delegate_;
 
 - (void)dealloc {
-  self.startDate = nil;
-  self.endDate   = nil;
   self.delegate  = nil;
-  [super dealloc];
 }
 
 - (id)    initAtPoint:(CGPoint)point
@@ -94,10 +91,10 @@ withCalendarContainer:(BOOL)withCalendarContainer
   bgView.backgroundColor = [UIColor clearColor];
   UITapGestureRecognizer *tapG = [[UITapGestureRecognizer alloc] init];
   tapG.delegate = self;
-  [bgView addGestureRecognizer:[tapG autorelease]];
+  [bgView addGestureRecognizer:tapG];
   [bgView setUserInteractionEnabled:YES];
   
-  [self.view addSubview:[bgView autorelease]];
+  [self.view addSubview:bgView];
   
   int width = 390;
   int height = 300;
@@ -134,19 +131,17 @@ withCalendarContainer:(BOOL)withCalendarContainer
 
 - (void)setStartDate:(NSDate *)sDate {
   if(startDate_) {
-    [startDate_ release];
     startDate_ = nil;
   }
-  startDate_ = [sDate retain];
+  startDate_ = sDate;
   [calView_ setStartDate:startDate_];
 }
 
 - (void)setEndDate:(NSDate *)eDate {
   if(endDate_) {
-    [endDate_ release];
     endDate_ = nil;
   }
-  endDate_ = [eDate retain];
+  endDate_ = eDate;
   [calView_ setEndDate:endDate_];
 }
 
