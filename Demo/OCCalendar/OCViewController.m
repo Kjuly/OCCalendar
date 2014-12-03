@@ -44,10 +44,10 @@
     bgView.backgroundColor = [UIColor clearColor];
     UITapGestureRecognizer *tapG = [[UITapGestureRecognizer alloc] init];
     tapG.delegate = self;
-    [bgView addGestureRecognizer:[tapG autorelease]];
+    [bgView addGestureRecognizer:tapG];
     [bgView setUserInteractionEnabled:YES];
     
-    [self.view addSubview:[bgView autorelease]];
+    [self.view addSubview:bgView];
     
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     
@@ -64,7 +64,6 @@
 	[dateParts setDay:8];
     
 	NSDate *sDate = [calendar dateFromComponents:dateParts];
-	[dateParts release];
     
     dateParts = [[NSDateComponents alloc] init];
 	[dateParts setMonth:5];
@@ -72,7 +71,6 @@
 	[dateParts setDay:14];
     
 	NSDate *eDate = [calendar dateFromComponents:dateParts];
-	[dateParts release];
     
     [calVC setStartDate:sDate];
     [calVC setEndDate:eDate];
@@ -93,19 +91,16 @@
     
     [self showToolTip:[NSString stringWithFormat:@"%@ - %@", [df stringFromDate:startDate], [df stringFromDate:endDate]]];
     
-    [df release];
     
     [calVC.view removeFromSuperview];
     
     calVC.delegate = nil;
-    [calVC release];
     calVC = nil;
 }
 
 -(void) completedWithNoSelection{
     [calVC.view removeFromSuperview];
     calVC.delegate = nil;
-    [calVC release];
     calVC = nil;
 }
 
@@ -122,7 +117,7 @@
     }
     
     toolTipLabel = [ [UILabel alloc ] initWithFrame:CGRectMake(self.view.frame.size.width-260.0, self.view.frame.size.height-35.0, 250.0, 25) ];
-    toolTipLabel.textAlignment =  UITextAlignmentCenter;
+    toolTipLabel.textAlignment =  NSTextAlignmentCenter;
     toolTipLabel.textColor = [UIColor whiteColor];
     toolTipLabel.backgroundColor = [UIColor colorWithWhite:0.0f alpha:0.5f];
     toolTipLabel.layer.cornerRadius = 5.0f;
@@ -131,7 +126,7 @@
     
     toolTipLabel.alpha = 0.0f;
     
-    [self.view addSubview:[toolTipLabel autorelease]];
+    [self.view addSubview:toolTipLabel];
     
     [UIView beginAnimations:@"fadeInToolTip" context:nil];
     [UIView setAnimationDuration:0.1f];

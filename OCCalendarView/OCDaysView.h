@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @interface OCDaysView : UIView {
-    int startCellX;
-    int startCellY;
-    int endCellX;
-    int endCellY;
+    long startCellX;
+    long startCellY;
+    long endCellX;
+    long endCellY;
     
     float xOffset;
     float yOffset;
@@ -20,16 +20,16 @@
     float hDiff;
     float vDiff;
     
-    int currentMonth;
-    int currentYear;
+    long currentMonth;
+    long currentYear;
     
     BOOL didAddExtraRow;
 }
 
-@property (nonatomic, retain) UIColor * todayColor;
+@property (nonatomic, strong) UIColor * todayColor;
 
-- (void)setMonth:(int)month;
-- (void)setYear:(int)year;
+- (void)setMonth:(long)month;
+- (void)setYear:(long)year;
 
 - (void)resetRows;
 

@@ -22,13 +22,13 @@ typedef enum {
 @interface OCCalendarView : UIView {
     NSCalendar *calendar;
     
-    int currentMonth;
-    int currentYear;
+    long currentMonth;
+    long currentYear;
     
-    int startCellX;
-    int startCellY;
-    int endCellX;
-    int endCellY;
+    long startCellX;
+    long startCellY;
+    long endCellX;
+    long endCellY;
     
     float hDiff;
     float vDiff;
